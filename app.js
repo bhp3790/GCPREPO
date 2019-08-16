@@ -18,23 +18,23 @@ const datastore = new DataStore({
 app.get('/getCustomers', async (req, res) => {
     var query = datastore.createQuery(kind);
     var result = await datastore.runQuery(query);
-    if (!result[0])
-        res.send('data not found')
+    if (result[0].length==0)
+        res.status(400).send('Data not found')
     else
         res.send(result[0]);
 })
 app.get('/getCustomer', async (req, res) => {
     console.log(req.query);
-    const id = req.query.id;
+    const id = parseInt(req.query.id);
     const query = datastore.createQuery(kind).filter('__key__', '=', datastore.key([kind, id]));
     var result = await datastore.runQuery(query);
-    if (!result[0])
-        res.send('data not found')
+    if (result[0].length==0)
+        res.status(400).send('Data not found')
     else
         res.send(result[0]);
 })
 app.post('/addCustomer', async (req, res) => {
-    var key = datastore.key([kind, req.body.id]);
+    var key = datastore.key([kind]);
     var entity = {
         key: key,
         data: req.body
