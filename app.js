@@ -7,7 +7,6 @@ const projectId = 'sturdy-sentry-243203';
 const keyFile = './key.json';
 const kind = 'customer';
 
-// parse application/json
 app.use(bodyParser.json())
 
 const datastore = new DataStore({
