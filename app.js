@@ -39,7 +39,7 @@ app.post('/addCustomer', async (req, res) => {
         data: req.body
     }
     await datastore.save(entity);
-    res.status(200).json('Data added successfully');
+    res.json('result ' + ': Data added Successfully')
 
 });
 
