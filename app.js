@@ -18,7 +18,7 @@ app.get('/getCustomers', async (req, res) => {
     var query = datastore.createQuery(kind);
     var result = await datastore.runQuery(query);
     if (result[0].length == 0)
-        res.status(400).json('result ' + ': No records found')
+        res.status(400).json({ "errMessage": "No record found" });
     else
         res.json(result[0]);
 })
@@ -28,7 +28,7 @@ app.get('/getCustomer', async (req, res) => {
     const query = datastore.createQuery(kind).filter('__key__', '=', datastore.key([kind, id]));
     var result = await datastore.runQuery(query);
     if (result[0].length == 0)
-        res.status(400).json('result ' + ': No records found')
+        res.status(400).json({ "errMessage": "No record found" });
     else
         res.json(result[0]);
 })
@@ -39,7 +39,7 @@ app.post('/addCustomer', async (req, res) => {
         data: req.body
     }
     await datastore.save(entity);
-    res.json('result ' + ': Data added Successfully')
+    res.json({ "result ": "Data added Successfully" });
 
 });
 
